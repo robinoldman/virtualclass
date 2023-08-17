@@ -3,7 +3,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -43,9 +43,9 @@ const NavBar = () => {
       </NavLink>
       <NavLink
         className={styles.NavLink}
-        to={'/profiles/${currentUser?.profile_id}'}
+        to={`/profiles/${currentUser?.profile_id}`}
       >
-        <img src= {{currentUser?.profile_i}/>
+        <img src={currentUser?.profile_image} alt="Profile" />
       </NavLink>
   
   
