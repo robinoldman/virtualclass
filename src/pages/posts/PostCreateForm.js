@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 
 import Upload from "../../assets/upload.png";
 
@@ -82,6 +83,11 @@ function PostCreateForm() {
               value={title}
               onChange={handleChange} />
           </Form.Group>
+          {errors?.title?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
           <Form.Group className="text-center">
               
@@ -89,18 +95,23 @@ function PostCreateForm() {
                 Content
               </Form.Label>
               <Form.Control 
-              rows={6}  
-              as='textarea' 
-              type="text"
-              value={content}
-              onChange={handleChange}/>
+                as="textarea"
+                rows={6}
+                name="content"
+                value={content}
+                onChange={handleChange}/>
           </Form.Group>
+          {errors?.content?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
     
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => history.goback}
       >
         cancel
       </Button>
@@ -152,6 +163,11 @@ function PostCreateForm() {
                 ref={imageInput}
               />
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
