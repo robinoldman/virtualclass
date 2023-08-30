@@ -18,20 +18,18 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
 
-
 function PostCreateForm() {
-
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
     title: "",
-    image: "",
     content: "",
+    image: "",
   });
   const { title, content, image } = postData;
 
-  const imageInput = useRef(null)
-  const history = useHistory()
+  const imageInput = useRef(null);
+  const history = useHistory();
 
   const handleChange = (event) => {
     setPostData({
@@ -50,68 +48,61 @@ function PostCreateForm() {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
 
-  const handleSubmit = async (event) =>{
-    event.preventDefault()
-    const formData =new FormData();
-
-    formData.append('title', title)
-    formData.append('content', content)
-    formData.append('image', imageInput.current.files[0])
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("image", imageInput.current.files[0]);
 
     try {
-      const{data} = await axiosReq.post('/posts/', formData);
-      history.push(`/posts/${data.id}`)
-    }catch(err){
-      console.log(err)
-      if (err.response?.status !== 401){
-        setErrors(err.response?.data)
+      const { data } = await axiosReq.post("/posts/", formData);
+      history.push(`/posts/${data.id}`);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
       }
-
     }
-  }
+  };
+
   const textFields = (
-      <div className="text-center">
-          <Form.Group className="text-center">
-              
-              <Form.Label>
-                Title
-              </Form.Label>
-              <Form.Control 
-              type="text" 
-              name="title"
-              value={title}
-              onChange={handleChange} />
-          </Form.Group>
-          {errors?.title?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
-                {message}
-              </Alert>
-            ))}
+    <div className="text-center">
+      <Form.Group>
+        <Form.Label>Title</Form.Label>
+        <Form.Control
+          type="text"
+          name="title"
+          value={title}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
-          <Form.Group className="text-center">
-              
-              <Form.Label>
-                Content
-              </Form.Label>
-              <Form.Control 
-                as="textarea"
-                rows={6}
-                name="content"
-                value={content}
-                onChange={handleChange}/>
-          </Form.Group>
-          {errors?.content?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
-                {message}
-              </Alert>
-            ))}
+      <Form.Group>
+        <Form.Label>Content</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="content"
+          value={content}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
-    
-    
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goback}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
@@ -120,7 +111,6 @@ function PostCreateForm() {
       </Button>
     </div>
   );
-
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -139,6 +129,7 @@ function PostCreateForm() {
                     <Form.Label
                       className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
+                      
                     >
                       Change the image
                     </Form.Label>
@@ -164,10 +155,11 @@ function PostCreateForm() {
               />
             </Form.Group>
             {errors?.image?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
+              <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
