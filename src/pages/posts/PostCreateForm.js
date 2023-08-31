@@ -12,10 +12,11 @@ import Upload from "../../assets/upload.png";
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Assets";
+import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 
 function PostCreateForm() {
@@ -165,6 +166,7 @@ function PostCreateForm() {
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
+          <PopularProfiles/>
         </Col>
       </Row>
     </Form>
