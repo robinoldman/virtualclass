@@ -34,7 +34,7 @@ const PopularProfiles = () => {
 
   return (
     <Container className={appStyles.Content}>
-      {popularProfiles.results.length ? (
+     {popularProfiles.results.length ? (
         <>
           <p>Most followed profiles.</p>
           {popularProfiles.results.map((profile) => (
@@ -47,5 +47,5 @@ const PopularProfiles = () => {
     </Container>
   );
 };
-
+/// add  <PopularProfiles/> to pages - will not register popularProfiles.results though
 export default PopularProfiles;
