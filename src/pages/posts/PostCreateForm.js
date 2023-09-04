@@ -16,7 +16,7 @@ import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
-import PopularProfiles from "../profiles/PopularProfiles";
+//import PopularProfiles from "../profiles/PopularProfiles";
 
 
 function PostCreateForm() {
